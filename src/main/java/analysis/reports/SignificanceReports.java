@@ -26,14 +26,19 @@ public class SignificanceReports {
 	private static final String PARTIAL_HEADER_TAG       = "PARTIAL";
 	
 	
+	 public static String getSignificanceReportP(List<GoStudy> studies){
+			
+			return getSignificanceReport(studies,";","p");
+			
+		}	
 	
-public static String getSignificanceReport(List<GoStudy> studies){
+ public static String getSignificanceReportPA(List<GoStudy> studies){
 		
 		return getSignificanceReport(studies,";","pa");
 		
 	}
 	
-public static String getSignificanceReport(List<GoStudy> studies, String sep, String type){
+ public static String getSignificanceReport(List<GoStudy> studies, String sep, String type){
 		
 		String r = "";
 		
@@ -99,12 +104,17 @@ public static String getSignificanceReport(List<GoStudy> studies, String sep, St
 
 	
 
-public static String getSignificanceReport(Experiment exp){
+public static String getSignificanceReportPA(Experiment exp){
 	
 	return getSignificanceReport(exp,";","pa");
 	
 }
 
+public static String getSignificanceReportP(Experiment exp){
+	
+	return getSignificanceReport(exp,";","p");
+	
+}
 	
 	
 public static String getSignificanceReport(Experiment exp, String sep, String type){

@@ -42,7 +42,12 @@ public class Solution implements Comparable<Solution>{
 
 		variables.put("spq"        ,new Double (init));
 	
-		variables.put("bioq", new Double (init));						
+		variables.put("bioq", new Double (init));		
+		
+		//BIOQN
+		variables.put("bioqn", new Double (init));
+		
+		variables.put("triqn", new Double (init));
 
 		variables.put("triq", new Double (init));
 				

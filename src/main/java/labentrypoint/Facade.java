@@ -155,13 +155,21 @@ public class Facade {
 			
 				LOG.info("Significance analysis");
 				
-				String sig_string = SignificanceReports.getSignificanceReport(exp);
+				String sig_string = SignificanceReports.getSignificanceReportPA(exp);
 				
 				OutTextFile f2 = new OutTextFile(auxFilePath+"_"+SystemUtilities.getSystemProperty("significance_file")+"."+csv_ext);
 				
 				f2.print(sig_string);
 				
 				f2.close();
+				
+				String sig_stringn = SignificanceReports.getSignificanceReportP(exp);
+				
+				OutTextFile f2n = new OutTextFile(auxFilePath+"_"+SystemUtilities.getSystemProperty("significance_filen")+"."+csv_ext);
+				
+				f2n.print(sig_stringn);
+				
+				f2n.close();
 									
 			}		
 								
@@ -227,13 +235,21 @@ public class Facade {
 				
 				LOG.info("Significance analysis");
 				
-				String sig_string = SignificanceReports.getSignificanceReport(analysis);
+				String sig_string = SignificanceReports.getSignificanceReportPA(analysis);
 				
 				OutTextFile f2 = new OutTextFile(auxFilePath+"_"+SystemUtilities.getSystemProperty("significance_file")+"."+csv_ext);
 				
 				f2.print(sig_string);
 				
 				f2.close();
+				
+				String sig_stringn = SignificanceReports.getSignificanceReportP(analysis);
+				
+				OutTextFile f2n = new OutTextFile(auxFilePath+"_"+SystemUtilities.getSystemProperty("significance_filen")+"."+csv_ext);
+				
+				f2n.print(sig_stringn);
+				
+				f2n.close();				
 				
 				LOG.info("Getting genes files");
 				
@@ -291,7 +307,7 @@ public class Facade {
 					
 			if (experiment.getAnalysisType() =='b'){		
 				
-				String sig_string = SignificanceReports.getSignificanceReport(experiment);
+				String sig_string = SignificanceReports.getSignificanceReportPA(experiment);
 				
 				OutTextFile f2 = new OutTextFile(pathToFolder+SystemUtilities.getFileSep()+experiment.getExperimentName()+"_"+
 						SystemUtilities.getSystemProperty("significance_file")+"."+csv_ext);
@@ -299,6 +315,17 @@ public class Facade {
 				f2.print(sig_string);
 				
 				f2.close();
+				
+				String sig_stringn = SignificanceReports.getSignificanceReportP(experiment);
+				
+				OutTextFile f2n = new OutTextFile(pathToFolder+SystemUtilities.getFileSep()+experiment.getExperimentName()+"_"+
+						SystemUtilities.getSystemProperty("significance_filen")+"."+csv_ext);
+				
+				f2n.print(sig_stringn);
+				
+				f2n.close();
+				
+				
 											
 			}		
 					

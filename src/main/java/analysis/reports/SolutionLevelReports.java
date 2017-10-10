@@ -16,6 +16,8 @@ public class SolutionLevelReports {
 	
 	//TRIQ
 	private static final String BIOQ = "BIOQ";
+	private static final String TRIQN = "TRIQN";
+	private static final String BIOQN = "BIOQN";
 	private static final String GRQ  = "GRQ";
 	private static final String PEQ  = "PEQ";
 	private static final String SPQ  = "SPQ";
@@ -101,15 +103,21 @@ public class SolutionLevelReports {
 		
 		String name     = sol.getName()+sep; 
 		double triq     = sol.getValue("triq");
-		
 		double bioq     = sol.getValue("bioq");
+		
+		double triqn     = sol.getValue("triqn");
+		double bioqn     = sol.getValue("bioqn");
+		
 		double grq      = sol.getValue("grq");
 		double peq      = sol.getValue("peq");
 		double spq      = sol.getValue("spq");
 				
-		String s_triq     = "";
-		
+		String s_triq     = "";		
 		String s_bioq     = "";
+		
+		String s_triqn     = "";		
+		String s_bioqn     = "";
+		
 		String s_grq      = "";
 		String s_peq      = "";
 		String s_spq      = "";
@@ -118,6 +126,10 @@ public class SolutionLevelReports {
 			
 			 s_triq     = triq+sep;
 			 s_bioq     = bioq+sep;
+			 
+			 s_triqn     = triqn+sep;
+			 s_bioqn     = bioqn+sep;
+			 
 			 s_grq      = grq+sep;
 			 s_peq      = peq+sep;
 			 s_spq      = spq+sep;
@@ -131,15 +143,17 @@ public class SolutionLevelReports {
 			 	
 			 s_triq     = fr.format(triq)+sep;
 			 s_bioq     = fr.format(bioq)+sep;
+			 
+			 s_triqn     = fr.format(triqn)+sep;
+			 s_bioqn     = fr.format(bioqn)+sep;
+			 
 			 s_grq      = fr.format(grq)+sep;
 			 s_peq      = fr.format(peq)+sep;
 			 s_spq      = fr.format(spq)+sep;
 			
 		}
 		
-		r = name+s_triq+
-				
-				s_bioq+s_grq+s_peq+s_spq;
+		r = name+s_triq+	s_bioq+s_triqn+s_bioqn+s_grq+s_peq+s_spq;
 	
 		}
 		else{
@@ -179,9 +193,7 @@ public class SolutionLevelReports {
 				
 			}
 			
-			r = name+s_triq+
-					
-					s_grq+s_peq+s_spq;
+			r = name+s_triq+	s_grq+s_peq+s_spq;
 		}
 			
 		return r;
@@ -208,7 +220,7 @@ public class SolutionLevelReports {
 		
 		if (expType=='b'){
 			
-			r+=BIOQ+sep+GRQ+sep+PEQ+sep+SPQ;
+			r+=BIOQ+sep+TRIQN+sep+BIOQN+sep+GRQ+sep+PEQ+sep+SPQ;
 					
 		}
 		else{

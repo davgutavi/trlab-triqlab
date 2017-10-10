@@ -48,10 +48,17 @@ public class Experiment  {
 	
 	private void intializeVariables() {
 
-		expVariables.put("bestsolution", null);
-		expVariables.put("besttriq",null);
-		expVariables.put("mean", null);
-		expVariables.put("stdev", null);
+		double init = -1.0;
+		
+		expVariables.put("bestsolution", "");
+		expVariables.put("besttriq",new Double(init));
+		expVariables.put("mean",new Double(init));
+		expVariables.put("stdev",new Double(init));
+		
+		expVariables.put("bestsolutionn","");
+		expVariables.put("besttriqn",new Double(init));
+		expVariables.put("meann",new Double(init));
+		expVariables.put("stdevn",new Double(init));
 		
 		
 	}
@@ -141,6 +148,47 @@ public class Experiment  {
 		double stddev = sd.evaluate(triqs);
 		
 		expVariables.put("stdev", new Double(stddev));
+		
+		
+		
+		//****************************************************************************************
+		
+		if (analysisType=='b') {
+		
+		//BEST SOLUTION N
+		
+		Collections.sort(solutions,new SolutionOrder("triqn","g-l"));
+				
+		expVariables.put("bestsolutionn", solutions.get(0));
+		
+		//BEST TRIQN
+		
+		double valuen = (solutions.get(0)).getValue("triqn");
+				
+		expVariables.put("besttriqn", new Double(valuen));
+		
+		//SUMMARY
+		
+		double [] triqsn = getAllValues("triqn");
+				
+		//MEAN TRIQ
+						
+		double meann = StatUtils.mean(triqsn);	
+						
+		expVariables.put("meann", new Double(meann));
+				
+		//STDEV TRIQ
+
+		StandardDeviation sdn = new StandardDeviation();
+				
+		double stddevn = sdn.evaluate(triqsn);
+				
+		expVariables.put("stdevn", new Double(stddevn));
+		
+		}		
+		
+		//****************************************************************************************
+		
 		
 		Collections.sort(solutions);
 		

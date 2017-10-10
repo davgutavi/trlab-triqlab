@@ -63,15 +63,25 @@ public class Btriq implements TRIQ{
 		
 		double triq = 0.0;
 		
+		//triq no ajustado
+		double triqn = 0.0;
+		
 		double grq  = sol.getValue("grq");
 		double peq  = sol.getValue("peq");
 		double spq  = sol.getValue("spq");
 		double bioq  = sol.getValue("bioq");
+		
+		//bioq no ajustado
+		double bioqn  = sol.getValue("bioqn");
+		
 					
 		double wgrq  = grq*wGrq;
 		double wpeq  = peq*wPeq;
 		double wspq  = spq*wSpq;
 		double wbioq = bioq*wBioq;
+		
+		//wbioq no ajustado
+		double wbioqn = bioqn*wBioq;
 		
 //		sol.putValue("wgrq", wgrq);
 //		sol.putValue("wpeq", wpeq);
@@ -79,12 +89,23 @@ public class Btriq implements TRIQ{
 //		sol.putValue("wbioq", wbioq);
 			
 		double num = wgrq+wpeq+wspq+wbioq;
+		
+		//numerador no ajustado
+		double numn = wgrq+wpeq+wspq+wbioqn;
 			
 		double den = wGrq+wPeq+wSpq+wBioq;
+		
+		//denominador no ajustado
+		double denn = wGrq+wPeq+wSpq+wBioq;
 						
 		triq = num/den;
 		
+		//triq no ajustado
+		triqn = numn/denn;
+		
 		sol.putValue("triq", triq);
+		
+		sol.putValue("triqn", triqn);
 	
 	}
 	

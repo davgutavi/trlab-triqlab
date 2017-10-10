@@ -59,6 +59,7 @@ public class BIOQ {
 		
 		double [] sig       = significance.computeAllGoSig(goLevels);
 		
+		//CÁLCULO DE SIGNIFICANCIA EN BASE A P AJUSTADO (BIOQ)
 		double 	  maxpasig  = sig[1];
 		
 		double pasig    = sig[0];
@@ -66,6 +67,15 @@ public class BIOQ {
 		double npasig   = pasig/maxpasig;
 		
 		sol.putValue("bioq", npasig);
+		
+		//CÁLCULO DE SIGNIFICANCIA EN BASE A P NORMAL (BIOQN)
+		double 	  maxpsig  = sig[3];
+						
+		double psig    = sig[2];
+				
+		double npsig   = psig/maxpsig;
+				
+		sol.putValue("bioqn", npsig);
 				
 	}
 

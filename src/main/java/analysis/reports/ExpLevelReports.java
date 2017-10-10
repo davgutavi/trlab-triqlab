@@ -15,6 +15,10 @@ public class ExpLevelReports {
 		private static final String BESTTRIQ     = "BEST TRIQ";
 		private static final String MEAN         = "MEAN";
 		private static final String SDEV         = "SDEV";
+		private static final String BESTSOLUTIONN = "BEST SOLUTIONN";
+		private static final String BESTTRIQN     = "BEST TRIQN";
+		private static final String MEANN         = "MEANN";
+		private static final String SDEVN         = "SDEVN";
 		
 		
 			
@@ -100,7 +104,12 @@ public class ExpLevelReports {
 			String mean = ((Double)exp.getValue("mean"))+sep;
 			String stdev = ((Double)exp.getValue("stdev"))+sep;
 			
-			r = name+dataset+bestsol+besttriq+mean+stdev;
+			String bestsoln = ((Solution)exp.getValue("bestsolutionn")).getName()+sep;
+			String besttriqn = ((Double)exp.getValue("besttriqn"))+sep;
+			String meann = ((Double)exp.getValue("meann"))+sep;
+			String stdevn = ((Double)exp.getValue("stdevn"))+sep;
+			
+			r = name+dataset+bestsol+besttriq+mean+stdev+bestsoln+besttriqn+meann+stdevn;
 			
 			return r;
 		}
@@ -108,7 +117,7 @@ public class ExpLevelReports {
 
 		public static String getHeader(String sep) {
 					
-			String r = EXPERIMENT+sep+DATASET+sep+BESTSOLUTION+sep+BESTTRIQ+sep+MEAN+sep+SDEV;
+			String r = EXPERIMENT+sep+DATASET+sep+BESTSOLUTION+sep+BESTTRIQ+sep+MEAN+sep+SDEV+sep+BESTSOLUTIONN+sep+BESTTRIQN+sep+MEANN+sep+SDEVN;
 			
 			return r;
 		}

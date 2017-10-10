@@ -71,6 +71,9 @@ public class BioSolutionPanel extends JPanel {
 		columnModel.getColumn(0).setMinWidth(90);
 		columnModel.getColumn(1).setMinWidth(320);
 		columnModel.getColumn(2).setMinWidth(110);
+		columnModel.getColumn(3).setMinWidth(110);
+		columnModel.getColumn(2).setCellRenderer(PvalueRender.getInstance() );
+		columnModel.getColumn(3).setCellRenderer(PvalueRender.getInstance() );
 		
 		JScrollPane tScroll = new JScrollPane (goTable);
 		tScroll.setMinimumSize(new Dimension(550,500));
