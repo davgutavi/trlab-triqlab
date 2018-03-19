@@ -25,6 +25,7 @@ import input.datasets.Biological;
 import input.datasets.Common;
 import input.laboratory.AnalysisResources;
 import input.laboratory.CommonAnalysisResources;
+import input.laboratory.OPTsolBatch;
 import input.laboratory.Options;
 import input.laboratory.ReducedAnalysisResources;
 import input.laboratory.WrongOptionsException;
@@ -383,6 +384,22 @@ public class Facade {
 			
 	}
 	
+	
+	// OPTricluster: from a list of Triclusters and a Dataset compute TRIQ
+	public static void buildOPTanalysisFiles (OPTsolBatch optInputs, String outputPath) throws WrongOptionsException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		
+		Options options = new Options();
+		
+		List<Tricluster> triclusters = optInputs.getTriclusters();
+		
+		Biological dataset = optInputs.getDataset();
+		
+		Experiment analysis = AnalysisFactory.getOPTexperiment(triclusters,options,dataset,"");
+		
+		
+		
+		
+	}
 	
 	
 	private static void printFolder (String[] strings, String outFolderPath,String outName, String folderName,String fileName, String extension) 

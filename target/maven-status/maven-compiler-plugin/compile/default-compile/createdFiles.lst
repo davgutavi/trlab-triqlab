@@ -1,14 +1,14 @@
 labentrypoint/Facade.class
 analysis/graphical/Transformation.class
 labinterface/GoTableModel.class
-labinterface/BioExperimentLevelFrame$2.class
 labinterface/MultipleAnalysisExpLevelFrame$1.class
+labinterface/BioExperimentLevelFrame$2.class
 labinterface/SingleAnalysisApp$1.class
 analysis/graphical/OriginalTransformationSupport.class
-labinterface/ExpCompGraphFrame.class
 labinterface/GuiSolution.class
-analysis/biological/BIOQ.class
+labinterface/ExpCompGraphFrame.class
 labentrypoint/CommandLine.class
+analysis/biological/BIOQ.class
 labinterface/TriGraphs.class
 analysis/reports/ExpLevelReports.class
 labinterface/SolutionButtonMenu.class
@@ -20,8 +20,8 @@ analysis/biological/GoStudy.class
 analysis/biological/GoSlot.class
 labinterface/BioExpTableModel.class
 analysis/SolutionOrder.class
-labinterface/MultipleAnalysisExpLevelFrame$2.class
 labinterface/SingleTaskConsole.class
+labinterface/MultipleAnalysisExpLevelFrame$2.class
 labinterface/BioSolutionPanel.class
 labinterface/MultipleAnalysisApp$1.class
 analysis/Ctriq.class
@@ -32,8 +32,8 @@ labinterface/GraphicsBuilder.class
 analysis/biological/GoTerm.class
 analysis/biological/PAtermOrder.class
 labutils/Conversions.class
-labinterface/CommonExperimentLevelFrame$2.class
 labutils/GeneOntology.class
+labinterface/CommonExperimentLevelFrame$2.class
 analysis/Solution.class
 labinterface/MultipleAnalysisExpLevelFrame$5.class
 labinterface/MultipleTaskConsole$MultipleAnalysisTask.class
@@ -63,6 +63,7 @@ analysis/biological/BiologicalAnalysis$1.class
 labinterface/SolutionButtonMenu$1.class
 analysis/biological/BiologicalAnalysis.class
 labinterface/MultipleTaskConsole.class
+labinterface/PvalueRender.class
 labinterface/MultipleAnalysisExpLevelFrame$4.class
 labinterface/MultipleAnalysisApp.class
 labinterface/MultipleTaskConsole$1.class

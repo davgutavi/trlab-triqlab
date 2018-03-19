@@ -33,38 +33,33 @@ public class AnalysisFactory {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AnalysisFactory.class);
 
+	public static List<Experiment> getAllExperiments(List<CommonAnalysisResources> resources, Options options)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 
-	public static List<Experiment> getAllExperiments (List<CommonAnalysisResources> resources, Options options) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		List<Experiment> experiments = new ArrayList<Experiment>();
 
+		for (CommonAnalysisResources rs : resources) {
 
-		List<Experiment> experiments = new ArrayList<Experiment> ();
+			if (rs instanceof AnalysisResources) {
 
+				AnalysisResources ar = (AnalysisResources) rs;
 
-		for (CommonAnalysisResources rs:resources){
-
-
-			if (rs instanceof AnalysisResources){
-
-				AnalysisResources ar = (AnalysisResources)rs;
-
-				Experiment e = getExperiment(rs.getSolutions(),options,(ar.getControl()).getDataset(),ar.getExperimentAlias());
-
-				experiments.add(e);
-
-
-
-			}
-
-			else if (rs instanceof ReducedAnalysisResources){
-
-				ReducedAnalysisResources rd = (ReducedAnalysisResources)rs;
-
-				Experiment e = getExperiment(rd.getSolutions(),options,rd.getDataset(),rd.getExperimentAlias());
+				Experiment e = getExperiment(rs.getSolutions(), options, (ar.getControl()).getDataset(),
+						ar.getExperimentAlias());
 
 				experiments.add(e);
 
 			}
 
+			else if (rs instanceof ReducedAnalysisResources) {
+
+				ReducedAnalysisResources rd = (ReducedAnalysisResources) rs;
+
+				Experiment e = getExperiment(rd.getSolutions(), options, rd.getDataset(), rd.getExperimentAlias());
+
+				experiments.add(e);
+
+			}
 
 		}
 
@@ -72,26 +67,18 @@ public class AnalysisFactory {
 
 	}
 
-
-
-
-
-	public static Experiment getExperiment(List<Tricluster> triclusters,
-			Options options, Common dataset, String experimentName)
-					throws InstantiationException, IllegalAccessException,
-					ClassNotFoundException {
+	public static Experiment getExperiment(List<Tricluster> triclusters, Options options, Common dataset,
+			String experimentName) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 		Experiment r = null;
 
 		char type = WorkFlowUtilities.getExperimentTypeFromDataset(dataset);
 
-
-
 		List<Solution> solutions = buildSolutions(triclusters);
 
 		// GRQ
 
-		GRQevaluator method = new MslEvaluator ();
+		GRQevaluator method = new MslEvaluator();
 
 		method.loadParameters(dataset.getDataset());
 
@@ -99,8 +86,7 @@ public class AnalysisFactory {
 
 		// PEQ, SPQ
 
-		CorrelationAnalysis correlation = new CorrelationAnalysis(
-				dataset.getDataset());
+		CorrelationAnalysis correlation = new CorrelationAnalysis(dataset.getDataset());
 
 		PEQ peqAnalysis = new PEQ(correlation, solutions);
 
@@ -110,32 +96,61 @@ public class AnalysisFactory {
 
 		if (type == 'b') {
 
-			BIOQ bioqAnalysis = new BIOQ(solutions, (Biological) dataset,
-					options);
+			BIOQ bioqAnalysis = new BIOQ(solutions, (Biological) dataset, options);
 
-			TRIQ triqAnalysis = new Btriq(solutions, grqAnalysis,
-					peqAnalysis, spqAnalysis, bioqAnalysis,
-					options.getGraphical(), options.getPearson(),
-					options.getSpearman(), options.getBiological());
+			TRIQ triqAnalysis = new Btriq(solutions, grqAnalysis, peqAnalysis, spqAnalysis, bioqAnalysis,
+					options.getGraphical(), options.getPearson(), options.getSpearman(), options.getBiological());
 
-			r = new Experiment(solutions, type, experimentName, dataset,
-					triqAnalysis);
+			r = new Experiment(solutions, type, experimentName, dataset, triqAnalysis);
 
 		} else {
 
 			LOG.debug("COMMON ANALYSIS");
-			
 
-			TRIQ triqAnalysis = new Ctriq(solutions, grqAnalysis,
-					peqAnalysis, spqAnalysis, options.getCgrq(),
+			TRIQ triqAnalysis = new Ctriq(solutions, grqAnalysis, peqAnalysis, spqAnalysis, options.getCgrq(),
 					options.getCpeq(), options.getCspq());
 
-			r = new Experiment(solutions, type, experimentName, dataset,
-					triqAnalysis);
+			r = new Experiment(solutions, type, experimentName, dataset, triqAnalysis);
 
 		}
 
+		return r;
 
+	}
+
+	// OPTricluster: TRIQ analysis functions
+
+	public static Experiment getOPTexperiment(List<Tricluster> triclusters, Options options, Biological dataset,
+			String experimentName) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		Experiment r = null;
+
+		char type = WorkFlowUtilities.getExperimentTypeFromDataset(dataset);
+
+		List<Solution> solutions = buildSolutions(triclusters);
+
+		// GRQ
+
+		GRQevaluator method = new MslEvaluator();
+
+		method.loadParameters(dataset.getDataset());
+
+		GRQ grqAnalysis = new GRQ(method, solutions);
+
+		// PEQ, SPQ
+
+		CorrelationAnalysis correlation = new CorrelationAnalysis(dataset.getDataset());
+
+		PEQ peqAnalysis = new PEQ(correlation, solutions);
+
+		SPQ spqAnalysis = new SPQ(correlation, solutions);
+
+		BIOQ bioqAnalysis = new BIOQ(solutions, dataset, options);
+
+		TRIQ triqAnalysis = new Btriq(solutions, grqAnalysis, peqAnalysis, spqAnalysis, bioqAnalysis,
+					options.getGraphical(), options.getPearson(), options.getSpearman(), options.getBiological());
+
+		r = new Experiment(solutions, type, experimentName, dataset, triqAnalysis);
 
 		return r;
 
