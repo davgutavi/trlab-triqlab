@@ -36,17 +36,22 @@ public class Solution implements Comparable<Solution>{
 		
 		double init = -1.0;
 		
+		// Grq value		
 		variables.put("grq",        new Double (init));		
 
+		// Peq value	
 		variables.put("peq"        ,new Double (init));		
 
+		// Spq value	
 		variables.put("spq"        ,new Double (init));
 	
+		// Bioq value (adjusted p-value)	
 		variables.put("bioq", new Double (init));		
 		
-		//BIOQN
+		// Bioq value (non-adjusted p-value)	
 		variables.put("bioqn", new Double (init));
 		
+		// Triq value (non-adjusted p-value)
 		variables.put("triqn", new Double (init));
 
 		variables.put("triq", new Double (init));

@@ -37,6 +37,8 @@ public class CommandLine {
 	private static final Logger LOG = LoggerFactory.getLogger(CommandLine.class);
 
 	private static Map<String, String> cmdLine = null;
+	
+	private static String currentMode = "";
 
 	private static final String COMAND_OPT = "-opt";
 
@@ -74,7 +76,7 @@ public class CommandLine {
 
 			LOG.debug(cmdLine.toString());
 
-			String first = args[0];
+			currentMode = args[0].toLowerCase();
 
 			String pathToInput = args[1];
 
@@ -106,10 +108,6 @@ public class CommandLine {
 
 			}
 			
-			LOG.info("Output folder = " + outFolder.getAbsolutePath());
-
-			LOG.info("Output name = " + outName);
-
 			// Process pathToOptionFile (-op) option
 
 			String optionsPath = cmdLine.get(OPTION_OPTIONS);
@@ -132,7 +130,7 @@ public class CommandLine {
 			
 			// Process  operation mode: single mode (-i), opt mode (-opt) and multiple mode (-l)
 
-			switch (first.toLowerCase()) {
+			switch (currentMode) {
 
 			case (COMAND_I): {
 				singleMode(pathToInput, options);
@@ -199,6 +197,10 @@ public class CommandLine {
 
 		LOG.info("Single mode");
 
+		LOG.info("Output folder = " + options.getOutFolder().getAbsolutePath());
+
+		LOG.info("Output name = " + options.getOutName());
+						
 		LabOneSolRun wf = new LabOneSolRun();
 
 		AnalysisResources res = wf.loadSolution(pathToInput);
@@ -241,47 +243,30 @@ public class CommandLine {
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 * @throws InterruptedException
+	 * @throws WrongOptionsException 
 	 */
 	private static void optMode(Options options)
 			throws FileNotFoundException, IOException, WrongContolException, InvalidImplementationException,
-			InstantiationException, IllegalAccessException, ClassNotFoundException, InterruptedException {
+			InstantiationException, IllegalAccessException, ClassNotFoundException, InterruptedException, WrongOptionsException {
 
 		LOG.info("OPT mode");
 
 		LabOptListRun wf = new LabOptListRun();
 				
 		String inputFolder = cmdLine.get("-opt_1");
+		
 		String datasetName = cmdLine.get("-opt_2");
 		
-		LOG.debug("Input folder = "+inputFolder);
-		LOG.debug("Dataset name = "+datasetName);
+		LOG.info("Input folder = "+inputFolder);
+		
+		LOG.info("Dataset name = "+datasetName);
 
-		// OPTsolBatch res = wf.listLoad(pathToInput, datasetName);
-		//
-		//
-		//
-		//
-		// String aOpt = cmdLine.get(OPTION_A);
-		//
-		// Experiment exp = null;
-		//
-		// if (aOpt != null) {
-		//
-		// LOG.info("Analysis");
-		//
-		// exp = Facade.buildAnalysis(res, options, true);
-		//
-		// }
-		//
-		// String fOpt = cmdLine.get(OPTION_F);
-		//
-		// if (fOpt != null) {
-		//
-		// LOG.info("Files");
-		//
-		// Facade.buildFiles(res, options, exp);
-		//
-		// }
+		OPTsolBatch res = wf.listLoad(inputFolder, datasetName);		
+		
+		Experiment experiment = Facade.buildOPTanalysis(res,options);
+		
+		Facade.buildOPTfiles(experiment, options);
+		
 
 	}
 	
@@ -304,6 +289,10 @@ public class CommandLine {
 				IllegalAccessException, ClassNotFoundException, InterruptedException, WrongOptionsException {
 
 			LOG.info("Multiple mode");
+			
+			LOG.info("Output folder = " + options.getOutFolder().getAbsolutePath());
+
+			LOG.info("Output name = " + options.getOutName());
 
 			char anType = 'b';
 

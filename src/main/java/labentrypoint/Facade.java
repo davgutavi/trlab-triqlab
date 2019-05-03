@@ -166,7 +166,7 @@ public class Facade {
 				
 				String sig_stringn = SignificanceReports.getSignificanceReportP(exp);
 				
-				OutTextFile f2n = new OutTextFile(auxFilePath+"_"+SystemUtilities.getSystemProperty("significance_filen")+"."+csv_ext);
+				OutTextFile f2n = new OutTextFile(auxFilePath+"_"+SystemUtilities.getSystemProperty("significance_file")+"."+csv_ext);
 				
 				f2n.print(sig_stringn);
 				
@@ -386,17 +386,42 @@ public class Facade {
 	
 	
 	// OPTricluster: from a list of Triclusters and a Dataset compute TRIQ
-	public static void buildOPTanalysisFiles (OPTsolBatch optInputs, String outputPath) throws WrongOptionsException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public static Experiment buildOPTanalysis (OPTsolBatch optInputs, Options options) throws WrongOptionsException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		
-		Options options = new Options();
-		
+			
 		List<Tricluster> triclusters = optInputs.getTriclusters();
 		
 		Biological dataset = optInputs.getDataset();
 		
-		Experiment analysis = AnalysisFactory.getOPTexperiment(triclusters,options,dataset,"");
+		Experiment analysis = AnalysisFactory.getOPTexperiment(triclusters,options,dataset,dataset.getDatasetName()+"_analysis");
+		
+		return analysis;
 		
 		
+	}
+	
+	//OPTricluster: build analysis results
+	public static void buildOPTfiles (Experiment experiment, Options options) 
+			throws WrongOptionsException, InstantiationException, IllegalAccessException, ClassNotFoundException, IOException, InterruptedException{
+		
+		
+		String auxFilePath = (options.getOutFolder()).getAbsolutePath()+SystemUtilities.getFileSep()+options.getOutName();
+											
+		String csv_ext = SystemUtilities.getSystemProperty("lab_extension");
+			
+		LOG.info("Computing TRIQ analysis");
+			
+		experiment.computeAnalysis();
+			
+			
+			String triq_string = SolutionLevelReports.getSLSinglefile(experiment);
+			
+			OutTextFile f1 = new OutTextFile(auxFilePath+"_"+SystemUtilities.getSystemProperty("triq_file")+"."+csv_ext);
+				
+			f1.print(triq_string);
+			
+			f1.close();	
+					
 		
 		
 	}

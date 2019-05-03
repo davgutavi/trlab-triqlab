@@ -3,6 +3,9 @@ package analysis.biological;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import analysis.Solution;
 import general.Tricluster;
 import input.datasets.Biological;
@@ -12,7 +15,7 @@ import labutils.Conversions;
 public class BIOQ {
 		
 //	@SuppressWarnings("unused")
-//	private static final Logger LOG = LoggerFactory.getLogger(BIOQ.class);
+	private static final Logger LOG = LoggerFactory.getLogger(BIOQ.class);
 	
 	private List<Solution> solutions;
 	private Biological resources;
@@ -41,6 +44,8 @@ public class BIOQ {
 		
 		for (Solution sol:solutions){
 						
+			LOG.debug("BIOQ -> "+sol.getName());
+			
 			computeOneSolution(sol,studies,significance);
 			
 		}
@@ -59,7 +64,7 @@ public class BIOQ {
 		
 		double [] sig       = significance.computeAllGoSig(goLevels);
 		
-		//CÁLCULO DE SIGNIFICANCIA EN BASE A P AJUSTADO (BIOQ)
+		//CÁLCULO DE SIGNIFICANCIA EN BASE A P-VALUE AJUSTADO (BIOQ)
 		double 	  maxpasig  = sig[1];
 		
 		double pasig    = sig[0];
@@ -68,7 +73,7 @@ public class BIOQ {
 		
 		sol.putValue("bioq", npasig);
 		
-		//CÁLCULO DE SIGNIFICANCIA EN BASE A P NORMAL (BIOQN)
+		//CÁLCULO DE SIGNIFICANCIA EN BASE A P-VALUE NORMAL (BIOQN)
 		double 	  maxpsig  = sig[3];
 						
 		double psig    = sig[2];

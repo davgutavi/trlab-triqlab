@@ -3,6 +3,9 @@ package analysis;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import analysis.biological.BIOQ;
 import analysis.correlation.PEQ;
 import analysis.correlation.SPQ;
@@ -11,7 +14,7 @@ import analysis.graphical.GRQ;
 public class Btriq implements TRIQ{
 	
 //	@SuppressWarnings("unused")
-//	private static final Logger LOG = LoggerFactory.getLogger(Btriq.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Btriq.class);
 	
 	
 	private List<Solution> solutions;
@@ -41,9 +44,13 @@ public class Btriq implements TRIQ{
 	
 	public void computeTRIQ() throws IOException, InterruptedException{
 		
+		LOG.debug("Computing GRQ");
 		grq.computeGrq();
+		LOG.debug("Computing PEQ");
 		peq.computePeq();
+		LOG.debug("Computing SPQ");
 		spq.computeSpq();
+		LOG.debug("Computing BIOQ");
 		bioq.computeBioq();
 		compute();
 		
@@ -53,7 +60,7 @@ public class Btriq implements TRIQ{
 	private void compute(){
 		
 		for (Solution sol:solutions){
-			
+						
 			computeOneSolution(sol);
 			
 		}

@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import input.datasets.Common;
 
@@ -15,7 +17,7 @@ import input.datasets.Common;
 public class Experiment  {
 	
 //	@SuppressWarnings("unused")
-//	private static final Logger LOG = LoggerFactory.getLogger(Experiment.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Experiment.class);
 	
 	private Common resources;
 	
@@ -101,6 +103,8 @@ public class Experiment  {
 	
 	
 	public void computeAnalysis () throws IOException, InterruptedException{
+		
+		LOG.debug("Solution level");
 		
 		computeAnalysisSolutionLevel();
 		

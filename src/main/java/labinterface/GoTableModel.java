@@ -2,7 +2,6 @@ package labinterface;
 
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import org.slf4j.Logger;
@@ -84,6 +83,7 @@ import analysis.biological.GoTerm;
 		return r;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Class getColumnClass(int columnIndex) {
 		
 		Class r = null;

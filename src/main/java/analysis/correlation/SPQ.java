@@ -9,7 +9,7 @@ import analysis.Solution;
 
 public class SPQ {
 
-	@SuppressWarnings("unused")
+//	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(SPQ.class);
 	
 	private static final String TYPE = "spearman";
@@ -30,7 +30,9 @@ public class SPQ {
 	public void computeSpq(){
 	
 		for (Solution sol:solutions){
-								
+							
+			LOG.debug("SPQ -> "+sol.getName());
+			
 			computeOneSolution(sol);
 			
 		}
