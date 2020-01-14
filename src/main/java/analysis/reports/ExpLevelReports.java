@@ -3,11 +3,17 @@ package analysis.reports;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import analysis.Experiment;
 import analysis.Solution;
 import utils.TextUtilities;
 
 public class ExpLevelReports {
+	
+	@SuppressWarnings("unused")
+	private static final Logger LOG = LoggerFactory.getLogger(ExpLevelReports.class);
 		
 		private static final String EXPERIMENT   = "EXPERIMENT";
 		private static final String DATASET      = "DATASET";
@@ -104,11 +110,25 @@ public class ExpLevelReports {
 			String mean = ((Double)exp.getValue("mean"))+sep;
 			String stdev = ((Double)exp.getValue("stdev"))+sep;
 			
-			String bestsoln = ((Solution)exp.getValue("bestsolutionn")).getName()+sep;
-			String besttriqn = ((Double)exp.getValue("besttriqn"))+sep;
-			String meann = ((Double)exp.getValue("meann"))+sep;
-			String stdevn = ((Double)exp.getValue("stdevn"))+sep;
+			LOG.debug(exp.getValue("bestsolution").getClass().getCanonicalName());
+			LOG.debug(exp.getValue("bestsolutionn").getClass().getCanonicalName());
+			LOG.debug(exp.getValue("besttriqn").getClass().getCanonicalName());
+			LOG.debug(exp.getValue("meann").getClass().getCanonicalName());
+			LOG.debug(exp.getValue("stdevn").getClass().getCanonicalName());
 			
+			String bestsoln = "";
+			String besttriqn = "";
+			String meann =  "";
+			String stdevn =  "";
+			
+			
+			if (exp.getAnalysisType()=='b') {
+				bestsoln = ((Solution)exp.getValue("bestsolutionn")).getName()+sep;
+				besttriqn = ((Double)exp.getValue("besttriqn"))+sep;
+				meann = ((Double)exp.getValue("meann"))+sep;
+				stdevn = ((Double)exp.getValue("stdevn"))+sep;
+			}
+						
 			r = name+dataset+bestsol+besttriq+mean+stdev+bestsoln+besttriqn+meann+stdevn;
 			
 			return r;
