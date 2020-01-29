@@ -33,6 +33,22 @@ public class Conversions {
 		
 	}
 	
+	public static int[] fromListOfIntegerToArray (List<Integer> list){
+		
+		int [] r = new int[list.size()];
+		
+		int index = 0;
+		
+		for (Integer number:list){
+			
+			r[index] = number.intValue();
+			
+			index++;
+		}
+				
+		return r;
+		
+	}
 	
 	public static String fromArrayOfStringToString (String[] array, String sep){
 		

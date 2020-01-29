@@ -12,7 +12,6 @@ import utils.TextUtilities;
 
 public class ExpLevelReports {
 	
-	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(ExpLevelReports.class);
 		
 		private static final String EXPERIMENT   = "EXPERIMENT";
