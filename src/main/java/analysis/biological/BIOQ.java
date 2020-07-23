@@ -14,7 +14,7 @@ import labutils.Conversions;
 
 public class BIOQ {
 		
-//	@SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(BIOQ.class);
 	
 	private List<Solution> solutions;
@@ -44,7 +44,7 @@ public class BIOQ {
 		
 		for (Solution sol:solutions){
 						
-			LOG.debug("BIOQ -> "+sol.getName());
+//			LOG.debug("BIOQ -> "+sol.getName()+"\n");
 			
 			computeOneSolution(sol,studies,significance);
 			

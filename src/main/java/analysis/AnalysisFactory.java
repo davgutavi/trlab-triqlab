@@ -31,6 +31,7 @@ import utils.WorkFlowUtilities;
  */
 public class AnalysisFactory {
 
+	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(AnalysisFactory.class);
 
 	public static List<Experiment> getAllExperiments(List<CommonAnalysisResources> resources, Options options)
@@ -105,7 +106,7 @@ public class AnalysisFactory {
 
 		} else {
 
-			LOG.debug("COMMON ANALYSIS");
+//			LOG.debug("COMMON ANALYSIS\n");
 
 			TRIQ triqAnalysis = new Ctriq(solutions, grqAnalysis, peqAnalysis, spqAnalysis, options.getCgrq(),
 					options.getCpeq(), options.getCspq());

@@ -16,7 +16,7 @@ import input.datasets.Common;
 
 public class Experiment  {
 	
-//	@SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(Experiment.class);
 	
 	private Common resources;
@@ -104,7 +104,7 @@ public class Experiment  {
 	
 	public void computeAnalysis () throws IOException, InterruptedException{
 		
-		LOG.debug("Solution level");
+//		LOG.debug("Solution level\n");
 		
 		computeAnalysisSolutionLevel();
 		

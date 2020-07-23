@@ -9,7 +9,7 @@ import analysis.Solution;
 
 public class PEQ {
 
-//	@SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(PEQ.class);
 	
 	private static final String TYPE = "pearson";
@@ -34,7 +34,7 @@ public class PEQ {
 	
 		for (Solution sol:solutions){
 			
-			LOG.debug("PEQ -> "+sol.getName());
+//			LOG.debug("PEQ -> "+sol.getName()+"\n");
 			
 			computeOneSolution(sol);
 			

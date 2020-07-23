@@ -48,7 +48,7 @@ public class Facade {
 						
 			if (e!=null){
 				
-				LOG.info(e.getExperimentName()+" -> Computing TRIQ analysis");
+//				LOG.info(e.getExperimentName()+" -> Computing TRIQ analysis\n");
 				
 				e.computeAnalysis();
 							
@@ -57,7 +57,7 @@ public class Facade {
 						
 		}		
 		
-		LOG.info("Building experiment level report");
+//		LOG.debug("Building experiment level report\n");
 		
 		String eLreport = ExpLevelReports.getELreport(r);
 				
@@ -67,7 +67,7 @@ public class Facade {
 		
 		f1.close();	
 		
-		LOG.info("Building solution level report");
+//		LOG.info("Building solution level report\n");
 		
 		String sLreport =  ExpLevelReports.getCompleteReport(r,(r.get(0)).getAnalysisType());
 		
@@ -95,7 +95,7 @@ public class Facade {
 		
 		if (r!=null){
 			
-			LOG.info("Computing TRIQ analysis");
+//			LOG.info("Computing TRIQ analysis\n");
 			
 			r.computeAnalysis();
 			
@@ -113,7 +113,7 @@ public class Facade {
 					
 		}
 		
-		LOG.info("TRIQ done");
+		LOG.info("TRIQ analysis completed\n");
 		
 		return r;
 					
@@ -130,7 +130,7 @@ public class Facade {
 		
 		String gene_ext = SystemUtilities.getSystemProperty("gene_extension");
 		
-		LOG.info("Building coordinate and arranged files");
+//		LOG.info("Building coordinate and arranged files");
 		
 		String[] excell_strings = FormatUtils.getExcelStrings(resources.getSolutions(), ((resources.getControl()).getDataset()).getDataset());
 		
@@ -145,7 +145,7 @@ public class Facade {
 		
 		 if (((resources.getControl()).getDataset()).getDatasetType() =='b'){
 		
-			LOG.info("Getting genes files");
+//			LOG.info("Getting genes files");
 			
 			String[] genes_strings = GeneOntology.getGeneStrings(resources.getSolutions(), ((Biological)(resources.getControl()).getDataset()).getGeneNames());
 			
@@ -154,7 +154,7 @@ public class Facade {
 					
 			if (exp!=null){
 			
-				LOG.info("Significance analysis");
+//				LOG.info("Significance analysis");
 				
 				String sig_string = SignificanceReports.getSignificanceReportPA(exp);
 				
@@ -202,7 +202,7 @@ public class Facade {
 					
 		if (analysis!=null){
 		
-			LOG.info("Computing TRIQ analysis");
+//			LOG.info("Computing TRIQ analysis\n");
 			
 			analysis.computeAnalysis();
 			
@@ -216,7 +216,7 @@ public class Facade {
 			
 			f1.close();
 			
-			LOG.info("Building coordinate and arranged files");
+//			LOG.debug("Building coordinate and arranged files\n");
 			
 			String[] excell_strings = FormatUtils.getExcelStrings(solutions, dataset.getDataset());
 			
@@ -234,7 +234,7 @@ public class Facade {
 			if (analysis.getAnalysisType() =='b'){
 				
 				
-				LOG.info("Significance analysis");
+//				LOG.debug("Significance analysis");
 				
 				String sig_string = SignificanceReports.getSignificanceReportPA(analysis);
 				
@@ -252,7 +252,7 @@ public class Facade {
 				
 				f2n.close();				
 				
-				LOG.info("Getting genes files");
+//				LOG.debug("Getting genes files");
 				
 				String[] genes_strings = GeneOntology.getGeneStrings(solutions, ((Biological)dataset).getGeneNames());
 				
@@ -276,7 +276,7 @@ public class Facade {
 			
 			res_dir.mkdirs();
 			
-			LOG.info(r.getExperimentAlias()+" -> building files in "+res_dir.getAbsolutePath());
+			LOG.info(r.getExperimentAlias()+" -> building files in "+res_dir.getAbsolutePath()+"\n");
 						
 			buildAllResultFiles(r,pathToFolder+SystemUtilities.getFileSep()+r.getExperimentAlias());
 			
@@ -409,7 +409,7 @@ public class Facade {
 											
 		String csv_ext = SystemUtilities.getSystemProperty("lab_extension");
 			
-		LOG.info("Computing TRIQ analysis");
+//		LOG.info("Computing TRIQ analysis");
 			
 		experiment.computeAnalysis();
 			

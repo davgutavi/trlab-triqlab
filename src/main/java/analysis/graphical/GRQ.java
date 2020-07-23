@@ -9,7 +9,7 @@ import analysis.Solution;
 
 public class GRQ {
 
-//	@SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(GRQ.class);
 	
 	//private static final double HIGHEST_LSL_MULTI = 2.0*Math.PI;
@@ -35,7 +35,7 @@ public class GRQ {
 		
 		for (Solution sol:solutions){
 				
-			LOG.debug("GRQ -> "+sol.getName());
+//			LOG.debug("GRQ -> "+sol.getName()+"\n");
 			computeOneSolution(sol);
 			
 		}

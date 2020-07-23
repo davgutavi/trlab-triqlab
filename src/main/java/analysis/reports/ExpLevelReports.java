@@ -12,6 +12,7 @@ import utils.TextUtilities;
 
 public class ExpLevelReports {
 	
+	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(ExpLevelReports.class);
 		
 		private static final String EXPERIMENT   = "EXPERIMENT";
@@ -109,11 +110,11 @@ public class ExpLevelReports {
 			String mean = ((Double)exp.getValue("mean"))+sep;
 			String stdev = ((Double)exp.getValue("stdev"))+sep;
 			
-			LOG.debug(exp.getValue("bestsolution").getClass().getCanonicalName());
-			LOG.debug(exp.getValue("bestsolutionn").getClass().getCanonicalName());
-			LOG.debug(exp.getValue("besttriqn").getClass().getCanonicalName());
-			LOG.debug(exp.getValue("meann").getClass().getCanonicalName());
-			LOG.debug(exp.getValue("stdevn").getClass().getCanonicalName());
+//			LOG.debug(exp.getValue("bestsolution").getClass().getCanonicalName());
+//			LOG.debug(exp.getValue("bestsolutionn").getClass().getCanonicalName());
+//			LOG.debug(exp.getValue("besttriqn").getClass().getCanonicalName());
+//			LOG.debug(exp.getValue("meann").getClass().getCanonicalName());
+//			LOG.debug(exp.getValue("stdevn").getClass().getCanonicalName());
 			
 			String bestsoln = "";
 			String besttriqn = "";
