@@ -150,11 +150,16 @@ public static String getSignificanceReport(Experiment exp, String sep, String ty
 			
 			for (Solution sol:solutions){
 				
-				GoSlot slot = (sol.getGoSlots(type)).get(i);
+				List<GoSlot> sol_go_slots = sol.getGoSlots(type);
 				
-				sufix = slot.getReport(sep);
+				if (sol_go_slots != null) {
 				
-				prefix+=sufix+sep;
+					GoSlot slot = sol_go_slots.get(i);
+				
+					sufix = slot.getReport(sep);
+				
+					prefix+=sufix+sep;
+				}
 				
 			}
 			

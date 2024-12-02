@@ -88,18 +88,20 @@ public class Solution implements Comparable<Solution>{
 		
 		List<GoSlot> slots = null;
 		
-		switch(type){
-		
-		case "pa":
-			slots = goLevels.getPa();
-			break;
+		if (goLevels != null) {
+			switch(type){
 			
-		case "p":
-			slots = goLevels.getP();
-			break;
-		
+			case "pa":
+				slots = goLevels.getPa();
+				break;
+				
+			case "p":
+				slots = goLevels.getP();
+				break;
+			
+			}
 		}
-		
+				
 		return slots;
 		
 	}

@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import labutils.GeneOntology;
 
 
@@ -27,7 +30,7 @@ import utils.TextUtilities;
 public class BiologicalAnalysis {
 	
 //	@SuppressWarnings("unused")
-//	private static final Logger LOG = LoggerFactory.getLogger(BiologicalAnalysis.class);
+	private static final Logger LOG = LoggerFactory.getLogger(BiologicalAnalysis.class);
 	
 	private String currentCommand;
 	
@@ -119,25 +122,23 @@ public class BiologicalAnalysis {
 		
 		//CREATE TEMPORAL FOLDER
 		
-//		LOG.debug("genes = "+currentGeneNames.length);
+		LOG.debug("genes = "+currentGeneNames.length);
 		
 		List<String []> tags = GeneOntology.getAllGeneNames(triclusters,currentGeneNames);
 		
 		//CREATE STUDY SET (GENE FILES)
 		
-//		LOG.info("Building Go Study sets");
-		
-		
-//		LOG.debug("TS = "+tags.size());
+		LOG.info("Building Go Study sets");
+
+		LOG.debug("TS = "+tags.size());
 		createStudySets(tags);
 		
 		//LAUNCH GO APP
 		
-//		LOG.info("Launching Go App");
-		
+		LOG.info("Launching Go App");
 		launchGOApp ();
 		
-//		LOG.info("Loading Go analysis");
+		LOG.info("Loading Go analysis");
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////LOAD RESULT FILES
 		
@@ -145,7 +146,7 @@ public class BiologicalAnalysis {
 		
 		Arrays.sort(tableFiles,new FileNameComparator());
 		
-//		LOG.debug("Table files length = "+tableFiles.length);
+		LOG.debug("Table files length = "+tableFiles.length);
 		
 		for (int i = 0; i < tableFiles.length; i++) {
 
@@ -223,7 +224,11 @@ public class BiologicalAnalysis {
 			deleteFoler(tablesFolder);	
 			bufferFile.delete();
 		}
-					
+		
+		// LOG.debug("###################### STUDIES:");		
+		// for(GoStudy s: gostudies)
+		// LOG.debug(s.toString());
+		
 		return gostudies;
 		
 	}
@@ -367,11 +372,11 @@ public class BiologicalAnalysis {
 			
 			String filePath = namesFolder.getAbsolutePath()+"/genes_"+index+".txt";
 			
-//			LOG.debug(filePath);
+			LOG.debug(filePath);
 			
 			OutTextFile f = new OutTextFile(filePath);
 			
-//			LOG.debug("GL = "+geneList.length);
+			LOG.debug("GL = "+geneList.length);
 			
 			for (int i = 0;i<geneList.length;i++){
 				
@@ -427,7 +432,7 @@ public class BiologicalAnalysis {
 
 		try {
 
-			//LOG.debug("executing " + currentCommand);
+			LOG.debug("executing " + currentCommand);
 
 			Process p = rt.exec(currentCommand);
 
@@ -441,7 +446,7 @@ public class BiologicalAnalysis {
 
 			while ((line = br.readLine()) != null) {
 
-				//LOG.info(line);
+				LOG.info(line);
 				buffer.print(line);
 			}
 			

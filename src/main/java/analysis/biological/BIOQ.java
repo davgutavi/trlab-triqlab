@@ -44,7 +44,7 @@ public class BIOQ {
 		
 		for (Solution sol:solutions){
 						
-//			LOG.debug("BIOQ -> "+sol.getName()+"\n");
+			//LOG.debug("BIOQ -> "+sol.getName()+"\n");
 			
 			computeOneSolution(sol,studies,significance);
 			
@@ -54,33 +54,52 @@ public class BIOQ {
 	
 	private void computeOneSolution(Solution sol, List<GoStudy> studies, GoSignificance significance){
 		
-		GoStudy goStudy = studies.get(sol.getIndex()-1);
-						
-		GoLevels goLevels = significance.getGoLevels(goStudy);
+		LOG.debug("[BIOQ] "+sol.getName()+"--"+sol.getIndex()+" (index "+(sol.getIndex()-1)+") of "+studies.size()+" studies");
 		
-		sol.setGoLevels(goLevels);
+		//for (GoStudy st:studies)
+			//LOG.debug(""+st);
 		
-		sol.setGoStudy(goStudy);
+		if (sol.getIndex()-1<studies.size()) {
+			
+			GoStudy goStudy = studies.get(sol.getIndex()-1);
+			
+			GoLevels goLevels = significance.getGoLevels(goStudy);
+			
+			sol.setGoLevels(goLevels);
+			
+			sol.setGoStudy(goStudy);
+			
+			double [] sig       = significance.computeAllGoSig(goLevels);
+			
+			//CÁLCULO DE SIGNIFICANCIA EN BASE A P-VALUE AJUSTADO (BIOQ)
+			double 	  maxpasig  = sig[1];
+			
+			double pasig    = sig[0];
+			
+			double npasig   = pasig/maxpasig;
+			
+			sol.putValue("bioq", npasig);
+			
+			//CÁLCULO DE SIGNIFICANCIA EN BASE A P-VALUE NORMAL (BIOQN)
+			double 	  maxpsig  = sig[3];
+							
+			double psig    = sig[2];
+					
+			double npsig   = psig/maxpsig;
+					
+			sol.putValue("bioqn", npsig);
+		}
+		else {
+			LOG.info("Tricluster #"+sol.getIndex()+" has not yielded Ontologizer results");
+			sol.setGoLevels(null);
+			sol.setGoStudy(null);
+			sol.putValue("bioq", -1.0d);
+			sol.putValue("bioqn", -1.0d);
+			
+		}
 		
-		double [] sig       = significance.computeAllGoSig(goLevels);
 		
-		//CÁLCULO DE SIGNIFICANCIA EN BASE A P-VALUE AJUSTADO (BIOQ)
-		double 	  maxpasig  = sig[1];
-		
-		double pasig    = sig[0];
-		
-		double npasig   = pasig/maxpasig;
-		
-		sol.putValue("bioq", npasig);
-		
-		//CÁLCULO DE SIGNIFICANCIA EN BASE A P-VALUE NORMAL (BIOQN)
-		double 	  maxpsig  = sig[3];
-						
-		double psig    = sig[2];
-				
-		double npsig   = psig/maxpsig;
-				
-		sol.putValue("bioqn", npsig);
+	
 				
 	}
 
